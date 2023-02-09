@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" spellcheck="false">
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="style.css">
@@ -20,13 +20,40 @@
           You <i>know</i> you want to.
         </div>
       </div>
-      <div class="form-container">
-        <form>
-
+      <form id="signupform">
+        <h1>Let's do this!</h1>
+        <div class="form-table">
+          <div class="form-column">
+            <div class="input-container">
+              <label for="first-name">First name</label>
+              <input type="text" id="first-name" name="first-name">
+              <div class="input-container"><label for="email">Email</label>
+              <input type="email" id="email" name="email"e></div>
+              <div class="input-container">
+              <label for="password" name="password">Password</label>
+              <input type="password" id="password" name="password"></div>
+            </div>
+          </div>
+          <div class="form-column">
+            <div class="input-container">
+              <label for="last-name">Last name</label>
+              <input type="text" id="last-name" name="last-name">
+            </div>
+            <div class="input-container">
+                <label for="phone-number">Phone number</label>
+                <input type="tel" id="phone-number" name="phone-number">
+            </div>
+              <div class="input-container">
+                <label for="password-confirmation" name="password-confirmation">Confirm password</label>
+                <input type="password" id="confirm-password">
+              </div>
+            </div>
+          </div>
         </form>
+      <div class="submit-section">
+              <button type="submit" form="signupform" id="submit-btn">Create account</button>
+              <div style="font-size: 20px;font-weight: bold;">Already have an account? <span style="color: rgb(156, 86, 221);">Log in</span></div>
       </div>
-      
-
     </div>
   </div>
   
