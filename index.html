@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="java.js" defer></script>
   <title>My Form</title>
 </head>
 <body>
@@ -24,35 +26,41 @@
         <h1>Let's do this!</h1>
         <div class="form-table">
           <div class="form-column">
-            <div class="input-container">
+            <div class="form-cell">
               <label for="first-name">First name</label>
-              <input type="text" id="first-name" name="first-name">
-              <div class="input-container"><label for="email">Email</label>
-              <input type="email" id="email" name="email"e></div>
               <div class="input-container">
+                <input type="text" id="first-name" name="first-name">
+                
+              </div>
+            </div>
+            <div class="form-cell">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email"e>
+            </div>
+            <div class="form-cell">
               <label for="password" name="password">Password</label>
               <input type="password" id="password" name="password"></div>
             </div>
-          </div>
-          <div class="form-column">
-            <div class="input-container">
-              <label for="last-name">Last name</label>
-              <input type="text" id="last-name" name="last-name">
-            </div>
-            <div class="input-container">
-                <label for="phone-number">Phone number</label>
-                <input type="tel" id="phone-number" name="phone-number">
-            </div>
-              <div class="input-container">
-                <label for="password-confirmation" name="password-confirmation">Confirm password</label>
-                <input type="password" id="confirm-password">
+            <div class="form-column">
+              <div class="form-cell">
+                <label for="last-name">Last name</label>
+                <input type="text" id="last-name" name="last-name">
+                
+              </div>
+              <div class="form-cell">
+                  <label for="phone-number">Phone number</label>
+                  <input type="tel" id="phone-number" name="phone-number">
+              </div>
+                <div class="form-cell">
+                  <label for="password-confirmation" name="password-confirmation">Confirm password</label>
+                  <input type="password" id="confirm-password">
+                </div>
               </div>
             </div>
-          </div>
         </form>
       <div class="submit-section">
               <button type="submit" form="signupform" id="submit-btn">Create account</button>
-              <div style="font-size: 20px;font-weight: bold;">Already have an account? <span style="color: rgb(156, 86, 221);">Log in</span></div>
+              <div style="font-size: 18px;font-weight: bold;">Already have an account? <span style="color: rgb(156, 86, 221);">Log in</span></div>
       </div>
     </div>
   </div>

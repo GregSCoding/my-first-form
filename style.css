@@ -26,13 +26,11 @@
   display: flex;
   gap: 70px;
 }
-
 form{
   padding: 20px 80px 50px 80px;
   background-color: white;
+  box-shadow: 0px 4px 5px rgb(231, 218, 218);
 }
-
-
 h1{
   font-size: 19px;
 }
@@ -43,7 +41,7 @@ label{
   position: relative;
   left: 2px;
 }
-.input-container{
+.form-cell{
   display: flex;
   flex-direction: column;
   margin-top: 20px;
@@ -92,18 +90,15 @@ body{
   flex-grow: 1;
   justify-content: space-between;
 }
-
 a{
   color: white;
 }
-
 #photo-credit{
   text-align: center;
   margin-bottom: 10px;
   opacity: 0.4;
 
 }
-
 #logo{
   margin-top: 180px;
   font-family: logoFont;
@@ -113,20 +108,16 @@ a{
   height: fit-content;
   text-align: center;
   opacity: 0.6;
-
 }
-
 @font-face {
   font-family: logoFont;
   src: url("fonts/Norse-Bold.otf");
 }
-
 .icon{
   position: relative;
   top: 5px;
   height: 1em;
 }
-
 .submit-section{
 display: flex;
 flex-direction: column;
@@ -134,7 +125,6 @@ align-items: flex-start;
 padding: 50px 80px;
 gap: 30px;
 }
-
 #submit-btn{
   padding: 10px;
   font-size: 20px;
@@ -143,5 +133,31 @@ gap: 30px;
   border-radius: 5px;
   font-weight: bold;
   color: white;
-  background-color: rgb(156, 86, 221);
+  background-color: rgb(192, 153, 230);
+  box-shadow: 1px 1px 5px 2px rgb(156, 86, 221);
+}
+.xicon{
+  color: red;
+}
+.tickicon{
+  color:greenyellow;
+}
+
+.input-container{
+  display: flex;
+  gap: 5px;
+  align-items: baseline;
+}
+.fa-check-circle-o{
+  color: rgb(126, 179, 47);
+  margin-right: -25px;
+}
+.fa-times-circle-o{
+  color: red;
+  margin-right: -25px;
+}
+input:focus{
+  outline: none;
+  border-color:  rgb(26, 26, 214);
+  box-shadow: 1px 2px 5px blue;
 }
