@@ -42,7 +42,8 @@
               <label for="password" name="password">Password</label>
               <div class="input-container">
                 <input type="password" id="password" name="password" required pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
-                data-description="Must contain 8 chars, uppercase, lowercase and a symbol."></div>
+                data-description="8 chars, uppercase, lowercase and a symbol.">
+              </div>
               </div>
             </div>
             <div class="form-column">
@@ -62,8 +63,7 @@
                 <div class="form-cell">
                   <label for="password-confirmation" name="password-confirmation">Confirm password</label>
                   <div class="input-container">
-                    <input type="password" id="confirm-password" required pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
-                    data-description="Please enter matching password.">
+                    <input type="password" id="confirm-password" required data-description="Please enter matching password.">
                   </div>
                 </div>
               </div>
