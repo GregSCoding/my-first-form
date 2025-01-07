@@ -6,6 +6,10 @@ let inputs = document.querySelectorAll("input");
 let passwordInputs = document.querySelectorAll('[type="password"]');
 let passwordInput = passwordInputs[0];
 let passwordConfirmation = passwordInputs[1];
+let checkBoxes = document.querySelectorAll('type="checkbox"');
+checkBoxes.forEach(elem => {
+  elem.removeEventListener("focusout", validate);
+});
 inputs.forEach(elem => {
   elem.addEventListener("focusout", validate);
 });
@@ -32,7 +36,7 @@ function passwordMatch(event){
 }
 
 function validate(event){
-  if(event.target.hasIcon = true) removeIndicators(event);
+  if(event.target.hasIcon = true) removeIndicators(event);passwordInputs = document.querySelectorAll('[type="password"]');
   if(event.target.checkValidity()){
     event.target.parentNode.append(checkicon.cloneNode());
     event.target.classList.add("valid");

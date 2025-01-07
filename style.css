@@ -24,7 +24,7 @@
 
 .form-table{
   display: flex;
-  gap: 70px;
+  gap: 80px;
 }
 form{
   padding: 20px 80px 50px 80px;
@@ -47,7 +47,19 @@ label{
   gap: 5px;
   margin-top: 40px;
 }
-input{
+.checkbox{
+  border-radius: 3px;
+  border-width: 0.1px;
+  border-color: rgb(218, 206, 194);
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 10px;
+  font-size: 15px;
+  padding: 4px;
+  margin-top: 3px;
+}
+
+.text{
   border-radius: 3px;
   border-width: 0.1px;
   border-color: rgb(218, 206, 194);
@@ -163,7 +175,7 @@ input:focus{
   box-shadow: 1px 2px 5px blue;
 }
 .valid{
-  border-color: rgb(126, 179, 47);
+  border-color: rgb(126, 179, 47);Stwórz
   box-shadow: 1px 2px 5px rgb(126, 179, 47);
 }
 .invalid{
