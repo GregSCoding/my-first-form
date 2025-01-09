@@ -1,5 +1,55 @@
 <!DOCTYPE html>
 <html lang="en" spellcheck="false">
+
+<?php
+// Ustawienia bazy danych
+$host = 'localhost';
+$dbname = 'projekt1';
+$username = 'greg'; // Zmień na swoją nazwę użytkownika
+$password = 'Hahaha1@3';     // Zmień na swoje hasło
+
+try {
+    // Połączenie z bazą danych
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Sprawdzenie, czy dane zostały przesłane formularzem (metodą POST)
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // Pobranie danych z formularza
+        $imie = $_POST['first-name'];
+        $nazwisko = $_POST['last-name'];
+        $telefon = $_POST['phone-number'];
+        $email = $_POST['email'];
+        $haslo = password_hash($_POST['password'], PASSWORD_DEFAULT); // Haszowanie hasła
+        $adres = $_POST['adress'];
+
+        // Przygotowanie zapytania SQL
+        $sql = "INSERT INTO uzytkownicy (imie, nazwisko, telefon, email, haslo, adres) 
+                VALUES (:imie, :nazwisko, :telefon, :email, :haslo, :adres)";
+        $stmt = $pdo->prepare($sql);
+
+        // Przypisanie wartości do zapytania
+        $stmt->bindParam(':imie', $imie);
+        $stmt->bindParam(':nazwisko', $nazwisko);
+        $stmt->bindParam(':telefon', $telefon);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':haslo', $haslo);
+        $stmt->bindParam(':adres', $adres);
+
+        // Wykonanie zapytania
+        if ($stmt->execute()) {
+            // Jeśli zapisanie danych się uda, przekieruj do podsumowania
+            header("Location: podsumowanie.php");
+            exit; // Zatrzymaj dalsze wykonywanie skryptu
+        } else {
+            echo "Wystąpił problem podczas zapisywania danych.";
+        }
+    }
+} catch (PDOException $e) {
+    echo "Błąd połączenia z bazą danych: " . $e->getMessage();
+}
+?>
+
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="style.css">
@@ -19,7 +69,7 @@
           Zapisz się na nasz niesamowity kurs!
         </div>
       </div>
-      <form id="signupform">
+      <form id="signupform" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
         <h1>Formularz zgłoszeniowy</h1>
         <div class="form-table">
           <div class="form-column">
@@ -106,7 +156,7 @@
                 <div class="form-cell">
                   <label for="password-confirmation" name="password-confirmation">Powtórz hasło</label>
                   <div class="input-container">
-                    <input type="hasło" id="confirm-password" class="text" required data-description="Podaj takie samo hasło">
+                    <input type="password" id="confirm-password" class="text" required data-description="Podaj takie samo hasło">
                   </div>
                 </div>
               </div>

@@ -6,12 +6,13 @@ let inputs = document.querySelectorAll("input");
 let passwordInputs = document.querySelectorAll('[type="password"]');
 let passwordInput = passwordInputs[0];
 let passwordConfirmation = passwordInputs[1];
-let checkBoxes = document.querySelectorAll('type="checkbox"');
-checkBoxes.forEach(elem => {
-  elem.removeEventListener("focusout", validate);
-});
+let checkBoxes = document.querySelectorAll('[type="checkbox"]');
+
 inputs.forEach(elem => {
   elem.addEventListener("focusout", validate);
+});
+checkBoxes.forEach(elem => {
+  elem.removeEventListener("focusout", validate);
 });
 passwordConfirmation.removeEventListener("focusout", validate);
 passwordConfirmation.addEventListener("focusout", passwordMatch);
