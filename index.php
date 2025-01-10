@@ -1,46 +1,49 @@
-<!DOCTYPE html>
-<html lang="en" spellcheck="false">
-
 <?php
-// Ustawienia bazy danych
+
 $host = 'localhost';
 $dbname = 'projekt1';
-$username = 'greg'; // Zmień na swoją nazwę użytkownika
-$password = 'Hahaha1@3';     // Zmień na swoje hasło
+$username = 'greg'; 
+$password = 'Hahaha1@3';     
+
+session_start();
 
 try {
-    // Połączenie z bazą danych
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Sprawdzenie, czy dane zostały przesłane formularzem (metodą POST)
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        // Pobranie danych z formularza
         $imie = $_POST['first-name'];
         $nazwisko = $_POST['last-name'];
         $telefon = $_POST['phone-number'];
         $email = $_POST['email'];
-        $haslo = password_hash($_POST['password'], PASSWORD_DEFAULT); // Haszowanie hasła
+        $haslo = password_hash($_POST['password'], PASSWORD_DEFAULT); 
         $adres = $_POST['adress'];
+        $zainteresowania = isset($_POST['interests']) ? implode(',', $_POST['interests']) : 'Brak';
 
-        // Przygotowanie zapytania SQL
-        $sql = "INSERT INTO uzytkownicy (imie, nazwisko, telefon, email, haslo, adres) 
-                VALUES (:imie, :nazwisko, :telefon, :email, :haslo, :adres)";
+        $_SESSION['user'] = [
+          'imie' => $imie,
+          'nazwisko' => $nazwisko,
+          'email' => $email,
+          'telefon' => $telefon,
+          'adres' => $adres,
+          'zainteresowania' => $zainteresowania
+        ];
+
+        $sql = "INSERT INTO uzytkownicy (imie, nazwisko, telefon, email, haslo, adres, zainteresowania) 
+                VALUES (:imie, :nazwisko, :telefon, :email, :haslo, :adres, :zainteresowania)";
         $stmt = $pdo->prepare($sql);
 
-        // Przypisanie wartości do zapytania
         $stmt->bindParam(':imie', $imie);
         $stmt->bindParam(':nazwisko', $nazwisko);
         $stmt->bindParam(':telefon', $telefon);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':haslo', $haslo);
         $stmt->bindParam(':adres', $adres);
+        $stmt->bindParam(':zainteresowania', $zainteresowania);
 
-        // Wykonanie zapytania
         if ($stmt->execute()) {
-            // Jeśli zapisanie danych się uda, przekieruj do podsumowania
             header("Location: podsumowanie.php");
-            exit; // Zatrzymaj dalsze wykonywanie skryptu
+            exit; 
         } else {
             echo "Wystąpił problem podczas zapisywania danych.";
         }
@@ -49,6 +52,9 @@ try {
     echo "Błąd połączenia z bazą danych: " . $e->getMessage();
 }
 ?>
+
+<!DOCTYPE html>
+<html lang="en" spellcheck="false">
 
 <head>
   <meta charset="UTF-8">
@@ -96,19 +102,19 @@ try {
                 <label>Zainteresowania:</label>
                 <div class="checkbox-group">
                   <label>
-                    -spanie <input type="checkbox" class="checkbox" value="Spanie"> 
+                    -spanie <input type="checkbox" class="checkbox" name="inrests[]" value="Spanie"> 
                   </label><br>
                   <label>
-                    -szachy <input type="checkbox" class="checkbox" value="Szachy"> 
+                    -szachy <input type="checkbox" class="checkbox" name="inrests[]" value="Szachy"> 
                   </label><br>
                   <label>
-                    -sport <input type="checkbox" class="checkbox" name="options[]" value="Sport"> 
+                    -sport <input type="checkbox" class="checkbox" name="inrests[]" value="Sport"> 
                   </label><br>
                   <label>
-                    -nauka<input type="checkbox"class="checkbox" name="options[]" value="Nauka"> 
+                    -nauka<input type="checkbox"class="checkbox" name="inrests[]" value="Nauka"> 
                   </label><br>
                   <label>
-                    -programowanie<input type="checkbox" class="checkbox" name="options[]" value="Programowanie"> 
+                    -programowanie<input type="checkbox" class="checkbox" name="inrests[]" value="Programowanie"> 
                   </label><br>
                 </div>
               </div>
