@@ -8,6 +8,8 @@ if(isset($_SESSION['user'])){
     $email = $user['email'];
     $adres = $user['adres'];
     $zainteresowania = $user['zainteresowania'];
+    $wyksztalcenie = $user['wyksztalcenie'];
+    $login = $user['userlog'];
 }
 
 ?>
@@ -19,11 +21,13 @@ if(isset($_SESSION['user'])){
     <title>User Profile</title>
 </head>
 <body>
-    <h1>User Profile</h1>
+    <h1>Pomyślnie zapisano się na kurs, prosze sprawdzic poprawnosc danych</h1>
     <p><strong>Imię:</strong> <?php echo htmlspecialchars($imie); ?></p>
     <p><strong>Nazwisko:</strong> <?php echo htmlspecialchars($nazwisko); ?></p>
     <p><strong>Telefon:</strong> <?php echo htmlspecialchars($telefon); ?></p>
     <p><strong>Email:</strong> <?php echo htmlspecialchars($email); ?></p>
+    <p><strong>Login:</strong> <?php echo htmlspecialchars($login); ?></p>
+    <p><strong>Wykształcenie:</strong> <?php echo htmlspecialchars($wyksztalcenie); ?></p>
     <p><strong>Adres:</strong> <?php echo htmlspecialchars($adres); ?></p>
     <p><strong>Zainteresowania:</strong> <?php echo htmlspecialchars($zainteresowania); ?></p>
 </body>

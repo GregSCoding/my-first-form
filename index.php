@@ -3,7 +3,7 @@
 $host = 'localhost';
 $dbname = 'projekt1';
 $username = 'greg'; 
-$password = 'Hahaha1@3';     
+$password = 'Projekt1@3';     
 
 session_start();
 
@@ -16,9 +16,11 @@ try {
         $nazwisko = $_POST['last-name'];
         $telefon = $_POST['phone-number'];
         $email = $_POST['email'];
+        $userlog = $_POST['userlog'];
         $haslo = password_hash($_POST['password'], PASSWORD_DEFAULT); 
         $adres = $_POST['adress'];
-        $zainteresowania = isset($_POST['interests']) ? implode(',', $_POST['interests']) : 'Brak';
+        $wyksztalcenie = $_POST['education'];
+        $zainteresowania = isset($_POST['intrests']) ? implode(',', $_POST['intrests']) : 'Brak';
 
         $_SESSION['user'] = [
           'imie' => $imie,
@@ -26,11 +28,13 @@ try {
           'email' => $email,
           'telefon' => $telefon,
           'adres' => $adres,
-          'zainteresowania' => $zainteresowania
+          'zainteresowania' => $zainteresowania,
+          'userlog' => $userlog,
+          'wyksztalcenie' => $wyksztalcenie
         ];
 
-        $sql = "INSERT INTO uzytkownicy (imie, nazwisko, telefon, email, haslo, adres, zainteresowania) 
-                VALUES (:imie, :nazwisko, :telefon, :email, :haslo, :adres, :zainteresowania)";
+        $sql = "INSERT INTO uzytkownicy (imie, nazwisko, telefon, email, haslo, adres, zainteresowania, userlog, wyksztalcenie) 
+                VALUES (:imie, :nazwisko, :telefon, :email, :haslo, :adres, :zainteresowania,:userlog, :wyksztalcenie)";
         $stmt = $pdo->prepare($sql);
 
         $stmt->bindParam(':imie', $imie);
@@ -39,7 +43,9 @@ try {
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':haslo', $haslo);
         $stmt->bindParam(':adres', $adres);
+        $stmt->bindParam(':userlog', $userlog);
         $stmt->bindParam(':zainteresowania', $zainteresowania);
+        $stmt->bindParam(':wyksztalcenie', $wyksztalcenie);
 
         if ($stmt->execute()) {
             header("Location: podsumowanie.php");
@@ -86,9 +92,9 @@ try {
               </div>
             </div>
             <div class="form-cell">
-              <label for="login" name="login">Login</label>
+              <label for="userlog" name="userlog">Login</label>
               <div class="input-container">
-                <input type="text" class="text" id="login" name="login" required pattern="^.{3,8}$"
+                <input type="text" class="text" id="userlog" name="userlog" required pattern="^.{3,8}$"
                 data-description="3 do 8 znaków">
               </div>
               </div>
@@ -102,19 +108,19 @@ try {
                 <label>Zainteresowania:</label>
                 <div class="checkbox-group">
                   <label>
-                    -spanie <input type="checkbox" class="checkbox" name="inrests[]" value="Spanie"> 
+                    -spanie <input type="checkbox" class="checkbox" name="intrests[]" value="Spanie"> 
                   </label><br>
                   <label>
-                    -szachy <input type="checkbox" class="checkbox" name="inrests[]" value="Szachy"> 
+                    -szachy <input type="checkbox" class="checkbox" name="intrests[]" value="Szachy"> 
                   </label><br>
                   <label>
-                    -sport <input type="checkbox" class="checkbox" name="inrests[]" value="Sport"> 
+                    -sport <input type="checkbox" class="checkbox" name="intrests[]" value="Sport"> 
                   </label><br>
                   <label>
-                    -nauka<input type="checkbox"class="checkbox" name="inrests[]" value="Nauka"> 
+                    -nauka<input type="checkbox"class="checkbox" name="intrests[]" value="Nauka"> 
                   </label><br>
                   <label>
-                    -programowanie<input type="checkbox" class="checkbox" name="inrests[]" value="Programowanie"> 
+                    -programowanie<input type="checkbox" class="checkbox" name="intrests[]" value="Programowanie"> 
                   </label><br>
                 </div>
               </div>
@@ -137,12 +143,12 @@ try {
               <div class="input-container">
                 <div class="form-cell">
                 <label for="options">Wykształcenie</label>
-                <select id="options" name="options" required>
+                <select id="education" name="education" required>
                   <option value="" disabled selected>Wybierz opcję</option>
-                  <option value="option1">Brak</option>
-                  <option value="option2">Podstawowe</option>
-                  <option value="option3">Średnie</option>
-                  <option value="option4">Wyższe</option>
+                  <option value="Brak">Brak</option>
+                  <option value="Podstawowe">Podstawowe</option>
+                  <option value="Srednie">Średnie</option>
+                  <option value="Wyzsze">Wyższe</option>
                 </select>
               </div>
               </div>
